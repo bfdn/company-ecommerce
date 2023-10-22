@@ -8,6 +8,6 @@
     Lütfen aşağıdaki linke tıklayarak mailinizi doğrulayınız.<br>
 </p>
 
-<a href="{{ route('user.verify-token', ['token' => $token]) }}">
+<a href="{{ route('front.verify-token', ['token' => $token]) }}">
     Mailimi doğrula.
 </a>

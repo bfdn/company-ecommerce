@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class SendVerifyMailListener implements ShouldQueue
+class SendVerifyMailListener
 {
     /**
      * Create the event listener.

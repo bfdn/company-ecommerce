@@ -31,12 +31,15 @@ class Article extends Model
      */
     public function resolveRouteBinding($value, $field = null)
     {
-        $locale = app()->getLocale();
-        return $this
-            ->withWhereHas('category', fn ($query) => $query->select("id", "name", "slug"))
-            ->where("$field->{$locale}", $value)
-            ->active()
-            ->firstOrFail();
+        if ($field == "slug") {
+            $locale = app()->getLocale();
+            return $this
+                ->withWhereHas('category', fn ($query) => $query->select("id", "name", "slug"))
+                ->where("$field->{$locale}", $value)
+                ->active()
+                ->firstOrFail();
+        }
+        return parent::resolveRouteBinding($value, $field);
     }
 
     /** SCOPES METHODS **/

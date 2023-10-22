@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class VerifyNotification extends Notification
+class VerifyNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -41,7 +41,7 @@ class VerifyNotification extends Notification
             ->line("Merhaba $notifiable->name, hoşgeldin.")
             ->line("Lütfen aşağıdaki linke tıklayarak mailinizi doğrulayınız.")
             // ->action('Mailimi Doğrula', route('front.verify-token', ['token' => $this->token]))
-            ->action('Mailimi Doğrula', route('user.verify-token', ['token' => $this->token]))
+            ->action('Mailimi Doğrula', route('front.verify-token', ['locale' => config('app.locale'), 'token' => $this->token]))
             ->line('Aramıza katıldığınız için teşekkür ederiz.');
     }
 

@@ -21,6 +21,9 @@ use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProfileController;
+use App\Mail\QueueSendMail;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +46,26 @@ use Illuminate\Support\Facades\Route;
 
 // Route::prefix('admin')->as('front.')->group(function () {});
 
+Route::get('queue', function () {
+    // \App\Jobs\LogJob::dispatch('bilalfiddan@gmail.com')->onQueue("high");
+    // \App\Jobs\LogJob::dispatch('onur@gmail.com')->onQueue("medium");
+    // \App\Jobs\LogJob::dispatch('nese@gmail.com')->onQueue("high");
+    // \App\Jobs\LogJob::dispatch('busra@gmail.com')->onQueue("medium");
+    // \App\Jobs\LogJob::dispatch('yenibursra@gmail.com');
+
+    $user = User::find(2);
+    // \App\Jobs\MailSendJob::dispatch($user)->onQueue()->delay(now()->addSeconds(20)); // 20 saniye beklet;
+    // \App\Jobs\MailSendJob::dispatch($user)->delay(now()->addSeconds(20)); // 20 saniye beklet;
+    \App\Jobs\MailSendJob::dispatch($user); // 20 saniye beklet;
+
+    // Mail::to($user->email)->send(new QueueSendMail($user));
+
+    dd("tamamlandı");
+});
+
+
+
+
 Route::get('/', function () {
     return redirect(app()->getLocale());
 });
@@ -62,6 +85,8 @@ require_once('admin.php');
 // Route::get('ara/{kelime}', function ($kelime) {
 //     return 'Aradığınız kelime = ' . $kelime;
 // })->where('kelime', '.*');
+
+
 
 
 Route::as('front.')->group(function () {
@@ -135,7 +160,6 @@ Route::as('front.')->group(function () {
         Route::get(__('route.contact'), [HomeController::class, 'contactPage'])->name('contact');
     })->where(['locale' => '[a-zA-z{2}]']);
 });
-
 
 
 // Route::get('songs/create', [SongsController::class, 'create'])->name("song.create");

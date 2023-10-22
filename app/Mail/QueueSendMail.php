@@ -10,16 +10,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class VerifyMail extends Mailable
+class QueueSendMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user, public string $token)
+    public function __construct(public User $user)
     {
-        //$this->afterCommit();
+        //
     }
 
     /**
@@ -28,8 +28,7 @@ class VerifyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Doğrulama Maili',
-            // Address|string $from = null, $to = [], $cc = [], $bcc = [], $replyTo = [], string $subject = null, array $tags = [], array $metadata = [], Closure|array $using = []
+            subject: 'Queue Send Mail',
         );
     }
 
@@ -39,9 +38,8 @@ class VerifyMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            // view: 'view.name',
-            view: 'email.verify',
-            with: ['user' => $this->user, 'token' => $this->token]
+            view: 'email.mail-queue',
+            with: ['user' => $this->user]
         );
     }
 
