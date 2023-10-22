@@ -73,20 +73,6 @@ Route::get('/', function () {
 require_once('admin.php');
 
 
-/** ÜYELİK İŞLEMLERİ **/
-// Route::get(__('route.register'), [AuthController::class, "showRegister"])->name("user.register");
-// Route::post(__('route.register'), [AuthController::class, "register"]);
-// Route::get(__('route.login'), [AuthController::class, "showLoginUser"])->name("user.login");
-// Route::post(__('route.login'), [AuthController::class, "loginUser"]);
-// Route::get("/auth/verify/{token}", [AuthController::class, "verify"])->name("user.verify-token");
-
-
-
-// Route::get('ara/{kelime}', function ($kelime) {
-//     return 'Aradığınız kelime = ' . $kelime;
-// })->where('kelime', '.*');
-
-
 
 
 Route::as('front.')->group(function () {
@@ -160,37 +146,3 @@ Route::as('front.')->group(function () {
         Route::get(__('route.contact'), [HomeController::class, 'contactPage'])->name('contact');
     })->where(['locale' => '[a-zA-z{2}]']);
 });
-
-
-// Route::get('songs/create', [SongsController::class, 'create'])->name("song.create");
-// Route::get('songs/store', [SongsController::class, 'store'])->name("song.store");
-
-
-
-// Route::get("admin/login", [LoginController::class, "showLogin"])->name("login");
-// Route::post("admin/login", [LoginController::class, "login"]);
-
-// Route::post("/logout", [LoginController::class, "logout"])->name("logout");
-
-
-
-// Route::get("/login", [LoginController::class, "showLoginUser"])->name("user.login");
-// Route::post("/login", [LoginController::class, "loginUser"]);
-
-// Route::get("/register", [LoginController::class, "showRegister"])->name("register");
-// Route::post("/register", [LoginController::class, "register"]);
-
-
-
-// Route::get("/parola-sifirla", [LoginController::class, "showPasswordReset"])->name("passwordReset");
-// Route::post("/parola-sifirla", [LoginController::class, "sendPasswordReset"]);
-// Route::get("/parola-sifirla/{token}", [LoginController::class, "showPasswordResetConfirm"])->name("passwordResetToken");
-// Route::post("/parola-sifirla/{token}", [LoginController::class, "passwordReset"]);
-
-// Route::get("/auth/verify/{token}", [LoginController::class, "verify"])->name("verify-token");
-// // Route::get("/auth/verify/{userverify:token}", [LoginController::class, "verify"])->name("verify-token");
-// Route::get("/auth/{driver}/callback", [LoginController::class, "socialVerify"])->name("x");
-// Route::get("/auth/{driver}", [LoginController::class, "socialLogin"])->name("socialLogin");
-// // Route::get("/verify-check", function () {
-// //     dd("doğrulanmış");
-// // })->middleware("verified");
